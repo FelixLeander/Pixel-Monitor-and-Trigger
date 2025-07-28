@@ -73,6 +73,7 @@
             pictureBoxPreview.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBoxPreview.TabIndex = 0;
             pictureBoxPreview.TabStop = false;
+            pictureBoxPreview.MouseClick += PictureBoxPreview_MouseClick;
             // 
             // tableLayoutPanel1
             // 
@@ -280,7 +281,7 @@
             pictureBoxColor.Location = new Point(45, 18);
             pictureBoxColor.Name = "pictureBoxColor";
             pictureBoxColor.Size = new Size(214, 12);
-            pictureBoxColor.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxColor.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxColor.TabIndex = 1;
             pictureBoxColor.TabStop = false;
             // 
