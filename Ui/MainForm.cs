@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging.Effects;
-
-namespace ProjectMerlin.Ui;
+﻿namespace ProjectMerlin.Ui;
 
 public partial class MainForm : Form
 {
@@ -27,62 +24,92 @@ public partial class MainForm : Form
     {
         var (x, y) = ((int)numericUpDownX.Value, (int)numericUpDownY.Value);
 
-        RecordPicture(x, y);
+        textBoxHexColor.Text = CreatePreviewPictureGetHexColor(x, y);
+        SetHexColor();
     }
 
     private async void ButtonPickPosition_Click(object sender, EventArgs e)
     {
-        var delay = (int)numericUpDownDelay.Value;
-        await Task.Delay(delay * 1000);
-        var location = Cursor.Position;
+        try
+        {
+            buttonPickPosition.Enabled = false;
 
-        numericUpDownX.Value = location.X;
-        numericUpDownY.Value = location.Y;
+            var delay = (int)numericUpDownDelay.Value;
+            await Task.Delay(delay * 1000);
+            var location = Cursor.Position;
 
-        RecordPicture(location.X, location.Y);
+            numericUpDownX.Value = location.X;
+            numericUpDownY.Value = location.Y;
+
+            textBoxHexColor.Text = CreatePreviewPictureGetHexColor(location.X, location.Y);
+            SetHexColor();
+        }
+        finally
+        {
+            buttonPickPosition.Enabled = true;
+        }
     }
 
-    private void RecordPicture(int x, int y)
+    private string CreatePreviewPictureGetHexColor(int x, int y)
     {
-        const int centerOffset = 50;
-        int sX = x - centerOffset;
-        int sY = y - centerOffset;
+        int widthOffset = pictureBoxPreview.Width / 2;
+        int heightOffset = pictureBoxPreview.Height / 2;
+        int sX = x - widthOffset;
+        int sY = y - widthOffset;
 
         using var g = Graphics.FromImage(Bitmap);
-        g.CopyFromScreen(sX, sY, 0, 0, new Size(100, 100));
+        g.CopyFromScreen(sX, sY, 0, 0, new Size(pictureBoxPreview.Width, pictureBoxPreview.Height));
 
-        var centerPos = centerOffset / 2;
-        var centerColor = Bitmap.GetPixel(centerPos, centerPos);
-        var singleColor = new Bitmap(1, 1);
-        singleColor.SetPixel(0, 0, centerColor);
-        pictureBoxColor.Image = singleColor;
-        textBoxHexColor.Text = centerColor.Name;
+        var centerColor = Bitmap.GetPixel(widthOffset, heightOffset);
+        pictureBoxColor.BackColor = centerColor;
 
-        ApplyCrosshairMask(Bitmap, Color.Red);
-        pictureBoxPreview.Image = Bitmap;
+        pictureBoxPreview.Image = ApplyCrosshairMask(Bitmap, Color.Red, widthOffset, heightOffset);
 
-        static void ApplyCrosshairMask(Bitmap bitmap, Color color)
-        {
-            var hh = bitmap.Height / 2;
-            for (int y = 0; y < bitmap.Height; y++)
-                bitmap.SetPixel(hh, y, color);
+        return $"#{centerColor.Name}";
+    }
 
-            var wh = bitmap.Width / 2;
-            for (int x = 0; x < bitmap.Width; x++)
-                bitmap.SetPixel(x, wh, color);
-        }
+    private void PictureBoxPreview_MouseClick(object sender, MouseEventArgs e)
+    {
+        int heightOffset = e.Y - (pictureBoxPreview.Height / 2);
+        int widthOffset = e.X - (pictureBoxPreview.Width / 2);
+
+        numericUpDownX.Value += widthOffset;
+        numericUpDownY.Value += heightOffset;
     }
 
     private void TextBoxHexColor_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
-            DoShit();
+            SetHexColor();
+        else
+            textBoxHexColor.BackColor = default;
+    }
+    private void ButtonSetHex_Click(object sender, EventArgs e) => SetHexColor();
+    private void SetHexColor()
+    {
+        try
+        {
+            var color = Enum.TryParse(textBoxHexColor.Text, true, out KnownColor knownColor)
+                ? Color.FromKnownColor(knownColor)
+                : ColorTranslator.FromHtml(textBoxHexColor.Text);
+
+            pictureBoxColor.BackColor = color;
+            textBoxHexColor.BackColor = Color.LightGreen;
+        }
+        catch
+        {
+            textBoxHexColor.BackColor = Color.OrangeRed;
+        }
     }
 
-    private void ButtonSetHex_Click(object sender, EventArgs e) => DoShit();
-
-    private void DoShit()
+    private static Bitmap ApplyCrosshairMask(Bitmap bitmap, Color color, int x, int y)
     {
+        for (int h = 0; h < bitmap.Height; h++)
+            bitmap.SetPixel(x, h, color);
 
+        for (int w = 0; w < bitmap.Width; w++)
+            bitmap.SetPixel(w, y, color);
+
+        return bitmap;
     }
 }
