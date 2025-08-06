@@ -1,9 +1,15 @@
-﻿namespace ProjectMerlin.Ui;
+﻿using System.Runtime.CompilerServices;
+
+namespace ProjectMerlin.Ui;
 
 public partial class MainForm : Form
 {
-    private Bitmap Bitmap { get; set; } = new Bitmap(100, 100);
-    public MainForm() => InitializeComponent();
+    private Bitmap Bitmap { get; }
+    public MainForm()
+    {
+        InitializeComponent();
+        Bitmap = new Bitmap(pictureBoxPreview.Width, pictureBoxPreview.Height);
+    }
 
     private void MainForm_Load(object sender, EventArgs e)
     {
@@ -52,10 +58,10 @@ public partial class MainForm : Form
 
     private string CreatePreviewPictureGetHexColor(int x, int y)
     {
-        int widthOffset = pictureBoxPreview.Width / 2;
-        int heightOffset = pictureBoxPreview.Height / 2;
-        int sX = x - widthOffset;
-        int sY = y - widthOffset;
+        var widthOffset = pictureBoxPreview.Width / 2;
+        var heightOffset = pictureBoxPreview.Height / 2;
+        var sX = x - widthOffset;
+        var sY = y - widthOffset;
 
         using var g = Graphics.FromImage(Bitmap);
         g.CopyFromScreen(sX, sY, 0, 0, new Size(pictureBoxPreview.Width, pictureBoxPreview.Height));
@@ -70,8 +76,8 @@ public partial class MainForm : Form
 
     private void PictureBoxPreview_MouseClick(object sender, MouseEventArgs e)
     {
-        int heightOffset = e.Y - (pictureBoxPreview.Height / 2);
-        int widthOffset = e.X - (pictureBoxPreview.Width / 2);
+        var heightOffset = e.Y - (pictureBoxPreview.Height / 2);
+        var widthOffset = e.X - (pictureBoxPreview.Width / 2);
 
         numericUpDownX.Value += widthOffset;
         numericUpDownY.Value += heightOffset;
@@ -104,12 +110,27 @@ public partial class MainForm : Form
 
     private static Bitmap ApplyCrosshairMask(Bitmap bitmap, Color color, int x, int y)
     {
-        for (int h = 0; h < bitmap.Height; h++)
+        for (var h = 0; h < bitmap.Height; h++)
             bitmap.SetPixel(x, h, color);
 
-        for (int w = 0; w < bitmap.Width; w++)
+        for (var w = 0; w < bitmap.Width; w++)
             bitmap.SetPixel(w, y, color);
 
         return bitmap;
+    }
+
+    private void CheckedListBoxActions_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        labelActionsCount.Text = $@"Defined Actions: {checkedListBoxActions.Items.Count}";
+        buttonActionAddChange.Text = checkedListBoxActions.SelectedIndex >= 0 ? "Change Action" : "Add Action";
+    }
+
+    private void CheckedListBoxActions_Leave(object sender, EventArgs e)
+    {
+        buttonActionAddChange.Text = "Add Action";
+    }
+
+    private void ButtonActionAddSave_Click(object sender, EventArgs e)
+    {
     }
 }

@@ -30,6 +30,7 @@
         {
             pictureBoxPreview = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
+            groupBoxPickPixel = new GroupBox();
             tableLayoutPanelPosition = new TableLayoutPanel();
             tableLayoutPanelCoords = new TableLayoutPanel();
             labelX = new Label();
@@ -40,27 +41,49 @@
             buttonPickPosition = new Button();
             numericUpDownDelay = new NumericUpDown();
             labelDelay = new Label();
+            groupBox1 = new GroupBox();
             tableLayoutPanelTriggerConfig = new TableLayoutPanel();
             labelColorView = new Label();
-            labelColor = new Label();
             pictureBoxColor = new PictureBox();
             label2 = new Label();
             textBoxHexColor = new TextBox();
             buttonSetHex = new Button();
-            checkedListBox1 = new CheckedListBox();
+            groupBox2 = new GroupBox();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            button1 = new Button();
+            button2 = new Button();
+            groupBoxDefinedActions = new GroupBox();
+            checkedListBoxActions = new CheckedListBox();
+            labelActionsCount = new Label();
+            groupBoxDefineAction = new GroupBox();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            label4 = new Label();
+            label3 = new Label();
+            textBoxActionName = new TextBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            button3 = new Button();
+            buttonActionAddChange = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             buttonDeviceAdd = new Button();
             buttonDeviceRemove = new Button();
             listBoxDevices = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
             tableLayoutPanel1.SuspendLayout();
+            groupBoxPickPixel.SuspendLayout();
             tableLayoutPanelPosition.SuspendLayout();
             tableLayoutPanelCoords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownX).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownY).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).BeginInit();
+            groupBox1.SuspendLayout();
             tableLayoutPanelTriggerConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxColor).BeginInit();
+            groupBox2.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            groupBoxDefinedActions.SuspendLayout();
+            groupBoxDefineAction.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -69,7 +92,7 @@
             pictureBoxPreview.Dock = DockStyle.Fill;
             pictureBoxPreview.Location = new Point(159, 34);
             pictureBoxPreview.Name = "pictureBoxPreview";
-            pictureBoxPreview.Size = new Size(100, 100);
+            pictureBoxPreview.Size = new Size(164, 100);
             pictureBoxPreview.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBoxPreview.TabIndex = 0;
             pictureBoxPreview.TabStop = false;
@@ -81,17 +104,33 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanelPosition, 0, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanelTriggerConfig, 0, 1);
-            tableLayoutPanel1.Controls.Add(checkedListBox1, 1, 0);
+            tableLayoutPanel1.Controls.Add(groupBoxPickPixel, 0, 0);
+            tableLayoutPanel1.Controls.Add(groupBox1, 0, 1);
+            tableLayoutPanel1.Controls.Add(groupBox2, 2, 0);
+            tableLayoutPanel1.Controls.Add(groupBoxDefinedActions, 1, 0);
+            tableLayoutPanel1.Controls.Add(groupBoxDefineAction, 0, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(135, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new Size(723, 448);
             tableLayoutPanel1.TabIndex = 5;
+            // 
+            // groupBoxPickPixel
+            // 
+            groupBoxPickPixel.AutoSize = true;
+            groupBoxPickPixel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBoxPickPixel.Controls.Add(tableLayoutPanelPosition);
+            groupBoxPickPixel.Dock = DockStyle.Fill;
+            groupBoxPickPixel.Location = new Point(3, 3);
+            groupBoxPickPixel.Name = "groupBoxPickPixel";
+            groupBoxPickPixel.Size = new Size(332, 159);
+            groupBoxPickPixel.TabIndex = 9;
+            groupBoxPickPixel.TabStop = false;
+            groupBoxPickPixel.Text = "Pick Pixel Posistion";
             // 
             // tableLayoutPanelPosition
             // 
@@ -108,12 +147,12 @@
             tableLayoutPanelPosition.Controls.Add(numericUpDownDelay, 2, 0);
             tableLayoutPanelPosition.Controls.Add(labelDelay, 3, 0);
             tableLayoutPanelPosition.Dock = DockStyle.Fill;
-            tableLayoutPanelPosition.Location = new Point(3, 3);
+            tableLayoutPanelPosition.Location = new Point(3, 19);
             tableLayoutPanelPosition.Name = "tableLayoutPanelPosition";
             tableLayoutPanelPosition.RowCount = 2;
             tableLayoutPanelPosition.RowStyles.Add(new RowStyle());
             tableLayoutPanelPosition.RowStyles.Add(new RowStyle());
-            tableLayoutPanelPosition.Size = new Size(262, 137);
+            tableLayoutPanelPosition.Size = new Size(326, 137);
             tableLayoutPanelPosition.TabIndex = 3;
             // 
             // tableLayoutPanelCoords
@@ -229,58 +268,64 @@
             labelDelay.Text = "Delay (seconds)";
             labelDelay.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // groupBox1
+            // 
+            groupBox1.AutoSize = true;
+            groupBox1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBox1.Controls.Add(tableLayoutPanelTriggerConfig);
+            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.Location = new Point(3, 168);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(332, 135);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Pick Pixel Color";
+            // 
             // tableLayoutPanelTriggerConfig
             // 
+            tableLayoutPanelTriggerConfig.AutoSize = true;
+            tableLayoutPanelTriggerConfig.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanelTriggerConfig.ColumnCount = 3;
             tableLayoutPanelTriggerConfig.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanelTriggerConfig.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanelTriggerConfig.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanelTriggerConfig.Controls.Add(labelColorView, 0, 1);
-            tableLayoutPanelTriggerConfig.Controls.Add(labelColor, 0, 0);
-            tableLayoutPanelTriggerConfig.Controls.Add(pictureBoxColor, 1, 1);
-            tableLayoutPanelTriggerConfig.Controls.Add(label2, 0, 2);
-            tableLayoutPanelTriggerConfig.Controls.Add(textBoxHexColor, 1, 2);
-            tableLayoutPanelTriggerConfig.Controls.Add(buttonSetHex, 2, 2);
+            tableLayoutPanelTriggerConfig.Controls.Add(labelColorView, 0, 0);
+            tableLayoutPanelTriggerConfig.Controls.Add(pictureBoxColor, 1, 0);
+            tableLayoutPanelTriggerConfig.Controls.Add(label2, 0, 1);
+            tableLayoutPanelTriggerConfig.Controls.Add(textBoxHexColor, 1, 1);
+            tableLayoutPanelTriggerConfig.Controls.Add(buttonSetHex, 2, 1);
             tableLayoutPanelTriggerConfig.Dock = DockStyle.Fill;
-            tableLayoutPanelTriggerConfig.Location = new Point(3, 146);
+            tableLayoutPanelTriggerConfig.Location = new Point(3, 19);
             tableLayoutPanelTriggerConfig.Name = "tableLayoutPanelTriggerConfig";
-            tableLayoutPanelTriggerConfig.RowCount = 4;
-            tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle());
+            tableLayoutPanelTriggerConfig.RowCount = 2;
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle());
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle());
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelTriggerConfig.Size = new Size(262, 299);
+            tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelTriggerConfig.Size = new Size(326, 113);
             tableLayoutPanelTriggerConfig.TabIndex = 4;
             // 
             // labelColorView
             // 
             labelColorView.AutoSize = true;
-            labelColorView.Location = new Point(3, 15);
+            labelColorView.Dock = DockStyle.Fill;
+            labelColorView.Location = new Point(3, 0);
             labelColorView.Name = "labelColorView";
-            labelColorView.Size = new Size(36, 15);
+            labelColorView.Size = new Size(36, 18);
             labelColorView.TabIndex = 3;
             labelColorView.Text = "Color";
-            labelColorView.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // labelColor
-            // 
-            labelColor.AutoSize = true;
-            tableLayoutPanelTriggerConfig.SetColumnSpan(labelColor, 3);
-            labelColor.Dock = DockStyle.Top;
-            labelColor.Location = new Point(3, 0);
-            labelColor.Name = "labelColor";
-            labelColor.Size = new Size(256, 15);
-            labelColor.TabIndex = 0;
-            labelColor.Text = "Selected Color";
-            labelColor.TextAlign = ContentAlignment.MiddleCenter;
+            labelColorView.TextAlign = ContentAlignment.MiddleRight;
             // 
             // pictureBoxColor
             // 
             tableLayoutPanelTriggerConfig.SetColumnSpan(pictureBoxColor, 2);
             pictureBoxColor.Dock = DockStyle.Top;
-            pictureBoxColor.Location = new Point(45, 18);
+            pictureBoxColor.Location = new Point(45, 3);
             pictureBoxColor.Name = "pictureBoxColor";
-            pictureBoxColor.Size = new Size(214, 12);
+            pictureBoxColor.Size = new Size(278, 12);
             pictureBoxColor.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxColor.TabIndex = 1;
             pictureBoxColor.TabStop = false;
@@ -288,20 +333,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Dock = DockStyle.Fill;
-            label2.Location = new Point(3, 33);
+            label2.Dock = DockStyle.Top;
+            label2.Location = new Point(3, 18);
             label2.Name = "label2";
-            label2.Size = new Size(36, 31);
+            label2.Size = new Size(36, 15);
             label2.TabIndex = 2;
             label2.Text = "Hex";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.TextAlign = ContentAlignment.MiddleRight;
             // 
             // textBoxHexColor
             // 
             textBoxHexColor.Dock = DockStyle.Top;
-            textBoxHexColor.Location = new Point(45, 36);
+            textBoxHexColor.Location = new Point(45, 21);
             textBoxHexColor.Name = "textBoxHexColor";
-            textBoxHexColor.Size = new Size(175, 23);
+            textBoxHexColor.Size = new Size(239, 23);
             textBoxHexColor.TabIndex = 4;
             textBoxHexColor.KeyDown += TextBoxHexColor_KeyDown;
             // 
@@ -309,7 +354,7 @@
             // 
             buttonSetHex.AutoSize = true;
             buttonSetHex.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonSetHex.Location = new Point(226, 36);
+            buttonSetHex.Location = new Point(290, 21);
             buttonSetHex.Name = "buttonSetHex";
             buttonSetHex.Size = new Size(33, 25);
             buttonSetHex.TabIndex = 5;
@@ -317,15 +362,194 @@
             buttonSetHex.UseVisualStyleBackColor = true;
             buttonSetHex.Click += ButtonSetHex_Click;
             // 
-            // checkedListBox1
+            // groupBox2
             // 
-            checkedListBox1.Dock = DockStyle.Fill;
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(271, 3);
-            checkedListBox1.Name = "checkedListBox1";
-            tableLayoutPanel1.SetRowSpan(checkedListBox1, 2);
-            checkedListBox1.Size = new Size(200, 442);
-            checkedListBox1.TabIndex = 5;
+            groupBox2.AutoSize = true;
+            groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBox2.Controls.Add(tableLayoutPanel3);
+            groupBox2.Dock = DockStyle.Fill;
+            groupBox2.Location = new Point(547, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(173, 159);
+            groupBox2.TabIndex = 10;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Control";
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.AutoSize = true;
+            tableLayoutPanel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.Controls.Add(button1, 0, 0);
+            tableLayoutPanel3.Controls.Add(button2, 1, 0);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(3, 19);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(167, 137);
+            tableLayoutPanel3.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.AutoSize = true;
+            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button1.Dock = DockStyle.Fill;
+            button1.Location = new Point(3, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(77, 25);
+            button1.TabIndex = 0;
+            button1.Text = "Start";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.AutoSize = true;
+            button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button2.Dock = DockStyle.Fill;
+            button2.Enabled = false;
+            button2.Location = new Point(86, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(78, 25);
+            button2.TabIndex = 1;
+            button2.Text = "Stop";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxDefinedActions
+            // 
+            groupBoxDefinedActions.Controls.Add(checkedListBoxActions);
+            groupBoxDefinedActions.Controls.Add(labelActionsCount);
+            groupBoxDefinedActions.Dock = DockStyle.Fill;
+            groupBoxDefinedActions.Location = new Point(341, 3);
+            groupBoxDefinedActions.Name = "groupBoxDefinedActions";
+            tableLayoutPanel1.SetRowSpan(groupBoxDefinedActions, 3);
+            groupBoxDefinedActions.Size = new Size(200, 442);
+            groupBoxDefinedActions.TabIndex = 11;
+            groupBoxDefinedActions.TabStop = false;
+            groupBoxDefinedActions.Text = "Defined Actions";
+            // 
+            // checkedListBoxActions
+            // 
+            checkedListBoxActions.Dock = DockStyle.Fill;
+            checkedListBoxActions.FormattingEnabled = true;
+            checkedListBoxActions.Items.AddRange(new object[] { "dummy" });
+            checkedListBoxActions.Location = new Point(3, 19);
+            checkedListBoxActions.Name = "checkedListBoxActions";
+            checkedListBoxActions.Size = new Size(194, 405);
+            checkedListBoxActions.TabIndex = 5;
+            checkedListBoxActions.SelectedIndexChanged += CheckedListBoxActions_SelectedIndexChanged;
+            checkedListBoxActions.Leave += CheckedListBoxActions_Leave;
+            // 
+            // labelActionsCount
+            // 
+            labelActionsCount.Dock = DockStyle.Bottom;
+            labelActionsCount.Location = new Point(3, 424);
+            labelActionsCount.Name = "labelActionsCount";
+            labelActionsCount.Size = new Size(194, 15);
+            labelActionsCount.TabIndex = 6;
+            labelActionsCount.Text = "Defined Actions:";
+            labelActionsCount.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // groupBoxDefineAction
+            // 
+            groupBoxDefineAction.AutoSize = true;
+            groupBoxDefineAction.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBoxDefineAction.Controls.Add(tableLayoutPanel4);
+            groupBoxDefineAction.Dock = DockStyle.Fill;
+            groupBoxDefineAction.Location = new Point(3, 309);
+            groupBoxDefineAction.Name = "groupBoxDefineAction";
+            groupBoxDefineAction.Size = new Size(332, 136);
+            groupBoxDefineAction.TabIndex = 12;
+            groupBoxDefineAction.TabStop = false;
+            groupBoxDefineAction.Text = "Configuree Action";
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.AutoSize = true;
+            tableLayoutPanel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(label4, 0, 1);
+            tableLayoutPanel4.Controls.Add(label3, 0, 0);
+            tableLayoutPanel4.Controls.Add(textBoxActionName, 1, 0);
+            tableLayoutPanel4.Controls.Add(flowLayoutPanel1, 1, 1);
+            tableLayoutPanel4.Controls.Add(buttonActionAddChange, 2, 1);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(3, 19);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 3;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle());
+            tableLayoutPanel4.RowStyles.Add(new RowStyle());
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel4.Size = new Size(326, 114);
+            tableLayoutPanel4.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(3, 29);
+            label4.Name = "label4";
+            label4.Size = new Size(67, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Add Action";
+            label4.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(77, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Action Name";
+            label3.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // textBoxActionName
+            // 
+            textBoxActionName.Dock = DockStyle.Fill;
+            textBoxActionName.Location = new Point(86, 3);
+            textBoxActionName.Name = "textBoxActionName";
+            textBoxActionName.Size = new Size(155, 23);
+            textBoxActionName.TabIndex = 7;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoSize = true;
+            flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel1.Controls.Add(button3);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(86, 32);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(155, 31);
+            flowLayoutPanel1.TabIndex = 11;
+            // 
+            // button3
+            // 
+            button3.AutoSize = true;
+            button3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button3.Dock = DockStyle.Top;
+            button3.Location = new Point(3, 3);
+            button3.Name = "button3";
+            button3.Size = new Size(46, 25);
+            button3.TabIndex = 10;
+            button3.Text = "BP IO";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // buttonActionAddChange
+            // 
+            buttonActionAddChange.Location = new Point(247, 32);
+            buttonActionAddChange.Name = "buttonActionAddChange";
+            buttonActionAddChange.Size = new Size(75, 23);
+            buttonActionAddChange.TabIndex = 12;
+            buttonActionAddChange.Text = "Add Action";
+            buttonActionAddChange.UseVisualStyleBackColor = true;
+            buttonActionAddChange.Click += ButtonActionAddSave_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -346,6 +570,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new Size(135, 448);
             tableLayoutPanel2.TabIndex = 7;
             // 
@@ -397,6 +622,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            groupBoxPickPixel.ResumeLayout(false);
+            groupBoxPickPixel.PerformLayout();
             tableLayoutPanelPosition.ResumeLayout(false);
             tableLayoutPanelPosition.PerformLayout();
             tableLayoutPanelCoords.ResumeLayout(false);
@@ -404,9 +631,22 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownX).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownY).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDelay).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             tableLayoutPanelTriggerConfig.ResumeLayout(false);
             tableLayoutPanelTriggerConfig.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxColor).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            groupBoxDefinedActions.ResumeLayout(false);
+            groupBoxDefineAction.ResumeLayout(false);
+            groupBoxDefineAction.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
@@ -432,12 +672,27 @@
         private Label labelDelay;
         private Label label1;
         private TableLayoutPanel tableLayoutPanelTriggerConfig;
-        private Label labelColor;
-        private CheckedListBox checkedListBox1;
+        private CheckedListBox checkedListBoxActions;
         private PictureBox pictureBoxColor;
         private Label label2;
         private Label labelColorView;
         private TextBox textBoxHexColor;
         private Button buttonSetHex;
+        private TextBox textBoxActionName;
+        private Label label3;
+        private GroupBox groupBox1;
+        private GroupBox groupBoxPickPixel;
+        private GroupBox groupBox2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private Button button1;
+        private Button button2;
+        private GroupBox groupBoxDefinedActions;
+        private Label labelActionsCount;
+        private GroupBox groupBoxDefineAction;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label label4;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button button3;
+        private Button buttonActionAddChange;
     }
 }
