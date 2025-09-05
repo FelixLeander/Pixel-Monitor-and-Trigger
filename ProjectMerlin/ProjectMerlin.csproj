@@ -8,11 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Model\" />
-		<Folder Include="Model\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Buttplug" Version="4.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
 		<PackageReference Include="RestSharp" Version="112.1.0" />
