@@ -1,11 +1,14 @@
-﻿using System.Runtime.CompilerServices;
+﻿
+using PixelToyControl.Business;
+using System.ComponentModel;
 
-namespace ProjectMerlin.Ui;
+namespace PixelToyControl.Ui;
 
-public partial class MainForm : Form
+public partial class ConfigurationForm : Form
 {
+    public required ButtplugManager ButtplugManager;
     private Bitmap Bitmap { get; }
-    public MainForm()
+    public ConfigurationForm()
     {
         InitializeComponent();
         Bitmap = new Bitmap(pictureBoxPreview.Width, pictureBoxPreview.Height);
@@ -21,7 +24,6 @@ public partial class MainForm : Form
 
         if (listBoxDevices.SelectedValue is not string deviceName)
             return;
-
 
 
     }

@@ -1,6 +1,6 @@
-﻿namespace ProjectMerlin.Ui
+﻿namespace PixelToyControl.Ui
 {
-    partial class MainForm
+    partial class ConfigurationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -610,14 +610,14 @@
             listBoxDevices.TabIndex = 0;
             listBoxDevices.SelectedIndexChanged += ListBoxDevices_SelectedIndexChanged;
             // 
-            // MainForm
+            // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(858, 448);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(tableLayoutPanel2);
-            Name = "MainForm";
+            Name = "ConfigurationForm";
             Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
             tableLayoutPanel1.ResumeLayout(false);

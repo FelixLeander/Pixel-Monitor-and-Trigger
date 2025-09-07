@@ -9,8 +9,6 @@ namespace PixelControlledApi.Business;
 
 internal static class SingleApplication
 {
-    private static Mutex? _mutex;
-
     static public string AssemblyGuid
     {
         get
@@ -23,6 +21,7 @@ internal static class SingleApplication
         }
     }
 
+    private static Mutex? _mutex;
     internal static bool IsUnique()
     {
         _mutex?.ReleaseMutex();
