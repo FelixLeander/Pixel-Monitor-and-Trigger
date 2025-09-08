@@ -1,6 +1,7 @@
 ﻿
+using Buttplug.Client;
 using PixelToyControl.Business;
-using System.ComponentModel;
+using Serilog;
 
 namespace PixelToyControl.Ui;
 
@@ -16,24 +17,8 @@ public partial class ConfigurationForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-    }
-
-    private void ListBoxDevices_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        buttonDeviceRemove.Enabled = listBoxDevices.SelectedValue != null;
-
-        if (listBoxDevices.SelectedValue is not string deviceName)
-            return;
-
-
-    }
-
-    private void NumericUpDownXyCords_ValueChanged(object sender, EventArgs e)
-    {
-        var (x, y) = ((int)numericUpDownX.Value, (int)numericUpDownY.Value);
-
-        textBoxHexColor.Text = CreatePreviewPictureGetHexColor(x, y);
-        SetHexColor();
+        listBoxDevices.DataSource = ButtplugManager.BindingListDevices;
+        listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.DisplayName);
     }
 
     private async void ButtonPickPosition_Click(object sender, EventArgs e)
@@ -46,8 +31,14 @@ public partial class ConfigurationForm : Form
             await Task.Delay(delay * 1000);
             var location = Cursor.Position;
 
+            numericUpDownX.ValueChanged -= NumericUpDownXyCords_ValueChanged;
+            numericUpDownY.ValueChanged -= NumericUpDownXyCords_ValueChanged;
+
             numericUpDownX.Value = location.X;
             numericUpDownY.Value = location.Y;
+
+            numericUpDownX.ValueChanged += NumericUpDownXyCords_ValueChanged;
+            numericUpDownY.ValueChanged += NumericUpDownXyCords_ValueChanged;
 
             textBoxHexColor.Text = CreatePreviewPictureGetHexColor(location.X, location.Y);
             SetHexColor();
@@ -58,12 +49,20 @@ public partial class ConfigurationForm : Form
         }
     }
 
+    private void NumericUpDownXyCords_ValueChanged(object? sender, EventArgs e)
+    {
+        var (x, y) = ((int)numericUpDownX.Value, (int)numericUpDownY.Value);
+
+        textBoxHexColor.Text = CreatePreviewPictureGetHexColor(x, y);
+        SetHexColor();
+    }
+
     private string CreatePreviewPictureGetHexColor(int x, int y)
     {
         var widthOffset = pictureBoxPreview.Width / 2;
         var heightOffset = pictureBoxPreview.Height / 2;
         var sX = x - widthOffset;
-        var sY = y - widthOffset;
+        var sY = y - heightOffset;
 
         using var g = Graphics.FromImage(Bitmap);
         g.CopyFromScreen(sX, sY, 0, 0, new Size(pictureBoxPreview.Width, pictureBoxPreview.Height));
@@ -71,6 +70,7 @@ public partial class ConfigurationForm : Form
         var centerColor = Bitmap.GetPixel(widthOffset, heightOffset);
         pictureBoxColor.BackColor = centerColor;
 
+        Log.Verbose("Setting preview image.");
         pictureBoxPreview.Image = ApplyCrosshairMask(Bitmap, Color.Red, widthOffset, heightOffset);
 
         return $"#{centerColor.Name}";
@@ -119,20 +119,5 @@ public partial class ConfigurationForm : Form
             bitmap.SetPixel(w, y, color);
 
         return bitmap;
-    }
-
-    private void CheckedListBoxActions_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        labelActionsCount.Text = $@"Defined Actions: {checkedListBoxActions.Items.Count}";
-        buttonActionAddChange.Text = checkedListBoxActions.SelectedIndex >= 0 ? "Change Action" : "Add Action";
-    }
-
-    private void CheckedListBoxActions_Leave(object sender, EventArgs e)
-    {
-        buttonActionAddChange.Text = "Add Action";
-    }
-
-    private void ButtonActionAddSave_Click(object sender, EventArgs e)
-    {
     }
 }

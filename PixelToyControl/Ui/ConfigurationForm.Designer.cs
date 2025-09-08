@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             pictureBoxPreview = new PictureBox();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanelMain = new TableLayoutPanel();
             groupBoxPickPixel = new GroupBox();
             tableLayoutPanelPosition = new TableLayoutPanel();
             tableLayoutPanelCoords = new TableLayoutPanel();
@@ -56,19 +56,9 @@
             checkedListBoxActions = new CheckedListBox();
             labelActionsCount = new Label();
             groupBoxDefineAction = new GroupBox();
-            tableLayoutPanel4 = new TableLayoutPanel();
-            label4 = new Label();
-            label3 = new Label();
-            textBoxActionName = new TextBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            button3 = new Button();
-            buttonActionAddChange = new Button();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            buttonDeviceAdd = new Button();
-            buttonDeviceRemove = new Button();
             listBoxDevices = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanelMain.SuspendLayout();
             groupBoxPickPixel.SuspendLayout();
             tableLayoutPanelPosition.SuspendLayout();
             tableLayoutPanelCoords.SuspendLayout();
@@ -81,10 +71,6 @@
             groupBox2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             groupBoxDefinedActions.SuspendLayout();
-            groupBoxDefineAction.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBoxPreview
@@ -98,26 +84,26 @@
             pictureBoxPreview.TabStop = false;
             pictureBoxPreview.MouseClick += PictureBoxPreview_MouseClick;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanelMain
             // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(groupBoxPickPixel, 0, 0);
-            tableLayoutPanel1.Controls.Add(groupBox1, 0, 1);
-            tableLayoutPanel1.Controls.Add(groupBox2, 2, 0);
-            tableLayoutPanel1.Controls.Add(groupBoxDefinedActions, 1, 0);
-            tableLayoutPanel1.Controls.Add(groupBoxDefineAction, 0, 2);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(135, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(723, 448);
-            tableLayoutPanel1.TabIndex = 5;
+            tableLayoutPanelMain.ColumnCount = 3;
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanelMain.Controls.Add(groupBoxPickPixel, 0, 0);
+            tableLayoutPanelMain.Controls.Add(groupBox1, 0, 1);
+            tableLayoutPanelMain.Controls.Add(groupBox2, 2, 0);
+            tableLayoutPanelMain.Controls.Add(groupBoxDefinedActions, 1, 0);
+            tableLayoutPanelMain.Controls.Add(groupBoxDefineAction, 0, 2);
+            tableLayoutPanelMain.Dock = DockStyle.Fill;
+            tableLayoutPanelMain.Location = new Point(129, 0);
+            tableLayoutPanelMain.Name = "tableLayoutPanelMain";
+            tableLayoutPanelMain.RowCount = 3;
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle());
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanelMain.Size = new Size(729, 448);
+            tableLayoutPanelMain.TabIndex = 5;
             // 
             // groupBoxPickPixel
             // 
@@ -370,7 +356,7 @@
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(547, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(173, 159);
+            groupBox2.Size = new Size(179, 159);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Control";
@@ -390,7 +376,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(167, 137);
+            tableLayoutPanel3.Size = new Size(173, 137);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // button1
@@ -400,7 +386,7 @@
             button1.Dock = DockStyle.Fill;
             button1.Location = new Point(3, 3);
             button1.Name = "button1";
-            button1.Size = new Size(77, 25);
+            button1.Size = new Size(80, 25);
             button1.TabIndex = 0;
             button1.Text = "Start";
             button1.UseVisualStyleBackColor = true;
@@ -411,9 +397,9 @@
             button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             button2.Dock = DockStyle.Fill;
             button2.Enabled = false;
-            button2.Location = new Point(86, 3);
+            button2.Location = new Point(89, 3);
             button2.Name = "button2";
-            button2.Size = new Size(78, 25);
+            button2.Size = new Size(81, 25);
             button2.TabIndex = 1;
             button2.Text = "Stop";
             button2.UseVisualStyleBackColor = true;
@@ -425,7 +411,7 @@
             groupBoxDefinedActions.Dock = DockStyle.Fill;
             groupBoxDefinedActions.Location = new Point(341, 3);
             groupBoxDefinedActions.Name = "groupBoxDefinedActions";
-            tableLayoutPanel1.SetRowSpan(groupBoxDefinedActions, 3);
+            tableLayoutPanelMain.SetRowSpan(groupBoxDefinedActions, 3);
             groupBoxDefinedActions.Size = new Size(200, 442);
             groupBoxDefinedActions.TabIndex = 11;
             groupBoxDefinedActions.TabStop = false;
@@ -440,8 +426,6 @@
             checkedListBoxActions.Name = "checkedListBoxActions";
             checkedListBoxActions.Size = new Size(194, 405);
             checkedListBoxActions.TabIndex = 5;
-            checkedListBoxActions.SelectedIndexChanged += CheckedListBoxActions_SelectedIndexChanged;
-            checkedListBoxActions.Leave += CheckedListBoxActions_Leave;
             // 
             // labelActionsCount
             // 
@@ -457,7 +441,6 @@
             // 
             groupBoxDefineAction.AutoSize = true;
             groupBoxDefineAction.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBoxDefineAction.Controls.Add(tableLayoutPanel4);
             groupBoxDefineAction.Dock = DockStyle.Fill;
             groupBoxDefineAction.Location = new Point(3, 309);
             groupBoxDefineAction.Name = "groupBoxDefineAction";
@@ -466,162 +449,27 @@
             groupBoxDefineAction.TabStop = false;
             groupBoxDefineAction.Text = "Configuree Action";
             // 
-            // tableLayoutPanel4
-            // 
-            tableLayoutPanel4.AutoSize = true;
-            tableLayoutPanel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel4.ColumnCount = 3;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Controls.Add(label4, 0, 1);
-            tableLayoutPanel4.Controls.Add(label3, 0, 0);
-            tableLayoutPanel4.Controls.Add(textBoxActionName, 1, 0);
-            tableLayoutPanel4.Controls.Add(flowLayoutPanel1, 1, 1);
-            tableLayoutPanel4.Controls.Add(buttonActionAddChange, 2, 1);
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(3, 19);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 3;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.RowStyles.Add(new RowStyle());
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(326, 114);
-            tableLayoutPanel4.TabIndex = 0;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(3, 29);
-            label4.Name = "label4";
-            label4.Size = new Size(67, 15);
-            label4.TabIndex = 9;
-            label4.Text = "Add Action";
-            label4.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(77, 15);
-            label3.TabIndex = 8;
-            label3.Text = "Action Name";
-            label3.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // textBoxActionName
-            // 
-            textBoxActionName.Dock = DockStyle.Fill;
-            textBoxActionName.Location = new Point(86, 3);
-            textBoxActionName.Name = "textBoxActionName";
-            textBoxActionName.Size = new Size(155, 23);
-            textBoxActionName.TabIndex = 7;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.AutoSize = true;
-            flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel1.Controls.Add(button3);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(86, 32);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(155, 31);
-            flowLayoutPanel1.TabIndex = 11;
-            // 
-            // button3
-            // 
-            button3.AutoSize = true;
-            button3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            button3.Dock = DockStyle.Top;
-            button3.Location = new Point(3, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(46, 25);
-            button3.TabIndex = 10;
-            button3.Text = "BP IO";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // buttonActionAddChange
-            // 
-            buttonActionAddChange.Location = new Point(247, 32);
-            buttonActionAddChange.Name = "buttonActionAddChange";
-            buttonActionAddChange.Size = new Size(75, 23);
-            buttonActionAddChange.TabIndex = 12;
-            buttonActionAddChange.Text = "Add Action";
-            buttonActionAddChange.UseVisualStyleBackColor = true;
-            buttonActionAddChange.Click += ButtonActionAddSave_Click;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.AutoSize = true;
-            tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Controls.Add(buttonDeviceAdd, 0, 0);
-            tableLayoutPanel2.Controls.Add(buttonDeviceRemove, 0, 1);
-            tableLayoutPanel2.Controls.Add(listBoxDevices, 0, 2);
-            tableLayoutPanel2.Dock = DockStyle.Left;
-            tableLayoutPanel2.Location = new Point(0, 0);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 5;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.RowStyles.Add(new RowStyle());
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(135, 448);
-            tableLayoutPanel2.TabIndex = 7;
-            // 
-            // buttonDeviceAdd
-            // 
-            buttonDeviceAdd.AutoSize = true;
-            buttonDeviceAdd.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonDeviceAdd.Dock = DockStyle.Fill;
-            buttonDeviceAdd.Location = new Point(3, 3);
-            buttonDeviceAdd.Name = "buttonDeviceAdd";
-            buttonDeviceAdd.Size = new Size(129, 25);
-            buttonDeviceAdd.TabIndex = 1;
-            buttonDeviceAdd.Text = "Add Device";
-            buttonDeviceAdd.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeviceRemove
-            // 
-            buttonDeviceRemove.AutoSize = true;
-            buttonDeviceRemove.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonDeviceRemove.Dock = DockStyle.Fill;
-            buttonDeviceRemove.Enabled = false;
-            buttonDeviceRemove.Location = new Point(3, 34);
-            buttonDeviceRemove.Name = "buttonDeviceRemove";
-            buttonDeviceRemove.Size = new Size(129, 25);
-            buttonDeviceRemove.TabIndex = 2;
-            buttonDeviceRemove.Text = "Remove Device";
-            buttonDeviceRemove.UseVisualStyleBackColor = true;
-            // 
             // listBoxDevices
             // 
-            listBoxDevices.Dock = DockStyle.Fill;
+            listBoxDevices.Dock = DockStyle.Left;
             listBoxDevices.FormattingEnabled = true;
-            listBoxDevices.Location = new Point(3, 65);
+            listBoxDevices.Location = new Point(0, 0);
             listBoxDevices.Name = "listBoxDevices";
-            tableLayoutPanel2.SetRowSpan(listBoxDevices, 3);
-            listBoxDevices.Size = new Size(129, 380);
-            listBoxDevices.TabIndex = 0;
-            listBoxDevices.SelectedIndexChanged += ListBoxDevices_SelectedIndexChanged;
+            listBoxDevices.Size = new Size(129, 448);
+            listBoxDevices.TabIndex = 6;
             // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(858, 448);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(tableLayoutPanel2);
+            Controls.Add(tableLayoutPanelMain);
+            Controls.Add(listBoxDevices);
             Name = "ConfigurationForm";
             Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            tableLayoutPanelMain.ResumeLayout(false);
+            tableLayoutPanelMain.PerformLayout();
             groupBoxPickPixel.ResumeLayout(false);
             groupBoxPickPixel.PerformLayout();
             tableLayoutPanelPosition.ResumeLayout(false);
@@ -641,26 +489,13 @@
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
             groupBoxDefinedActions.ResumeLayout(false);
-            groupBoxDefineAction.ResumeLayout(false);
-            groupBoxDefineAction.PerformLayout();
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private PictureBox pictureBoxPreview;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
-        private ListBox listBoxDevices;
-        private Button buttonDeviceAdd;
-        private Button buttonDeviceRemove;
+        private TableLayoutPanel tableLayoutPanelMain;
         private TableLayoutPanel tableLayoutPanelCoords;
         private Label labelX;
         private Label labelY;
@@ -678,8 +513,6 @@
         private Label labelColorView;
         private TextBox textBoxHexColor;
         private Button buttonSetHex;
-        private TextBox textBoxActionName;
-        private Label label3;
         private GroupBox groupBox1;
         private GroupBox groupBoxPickPixel;
         private GroupBox groupBox2;
@@ -689,10 +522,6 @@
         private GroupBox groupBoxDefinedActions;
         private Label labelActionsCount;
         private GroupBox groupBoxDefineAction;
-        private TableLayoutPanel tableLayoutPanel4;
-        private Label label4;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Button button3;
-        private Button buttonActionAddChange;
+        private ListBox listBoxDevices;
     }
 }

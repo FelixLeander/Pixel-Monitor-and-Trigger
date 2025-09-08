@@ -12,6 +12,6 @@ public partial class DebugBcd : Form
 
     private void DebugBcd_Load(object sender, EventArgs e)
     {
-        ButtplugClientDevice.VibrateAttributes.Select(s => s.);
+        var list = ButtplugClientDevice.VibrateAttributes;
     }
 }

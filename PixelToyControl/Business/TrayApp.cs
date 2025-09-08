@@ -1,6 +1,8 @@
-﻿using Serilog;
+﻿using Buttplug.Client;
+using PixelToyControl.Models.Entity;
 using PixelToyControl.Ui;
-using System.Threading.Tasks;
+using Serilog;
+using System.Text.Json;
 
 namespace PixelToyControl.Business;
 
@@ -26,6 +28,16 @@ internal sealed class TrayApp : ApplicationContext
                 CreateOrShowConfigurator();
         };
 
+        _buttplugManager.ButtplugClient.DeviceRemoved += (s, dev) => ToyDevices.DropDownItems.RemoveByKey(dev.Device.DisplayName);
+        _buttplugManager.ButtplugClient.DeviceAdded += (s, dev) =>
+        {
+            var tsb = new ToolStripButton(dev.Device.DisplayName)
+            {
+                CheckState = CheckState.Checked,
+            };
+            ToyDevices.DropDownItems.Insert(-1, tsb);
+        };
+
         NotifyIcon.ContextMenuStrip.Items.Add("Open Configurator", null, (s, e) => CreateOrShowConfigurator());
         NotifyIcon.ContextMenuStrip.Items.Add(ToyDevices);
         NotifyIcon.ContextMenuStrip.Items.Add("Exit", null, (s, e) => ExitApplication());
@@ -33,8 +45,8 @@ internal sealed class TrayApp : ApplicationContext
 
     internal async Task StartAsync()
     {
+        Log.Verbose("Starting scan...");
         await _buttplugManager.ConnectAndScan();
-
 
     }
 
@@ -43,7 +55,7 @@ internal sealed class TrayApp : ApplicationContext
         Log.Verbose("Showing {form} value is {variable}", nameof(_configruationForm), _configruationForm == null ? "null" : "filled");
 
         _configruationForm = (_configruationForm == null || _configruationForm.IsDisposed)
-            ? new() { ButtplugManager = _buttplugManager}
+            ? new() { ButtplugManager = _buttplugManager }
             : _configruationForm;
 
         _configruationForm.Show();
