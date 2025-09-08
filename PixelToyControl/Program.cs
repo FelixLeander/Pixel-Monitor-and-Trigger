@@ -34,9 +34,11 @@ internal static class Program
                 return NotifyNamedPipe();
 
             Log.Information("Sucessfully aquired mutex. Initalizing background-worker on system tray.");
+            
             ApplicationConfiguration.Initialize();
             trayApp ??= new();
-            trayApp.StartAsync().Start();
+            _ = trayApp.StartAsync();
+
             Application.Run(trayApp);
 
             Log.Information("Program ran to completion. Ending application.");
@@ -45,7 +47,7 @@ internal static class Program
         catch (Exception ex)
         {
             Log.Fatal(ex, "Unexpected error. Promting user with error, ending application after ok.");
-
+            
             var displayErrorText =
                 $"""
                 Sorry, an unexpected error occured.
@@ -71,7 +73,7 @@ internal static class Program
     /// </summary>
     /// <returns>The serilog logger.</returns>
     private static Logger CreateLogger() => new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Verbose()
                 .WriteTo.File("logs/log.log", LogEventLevel.Information, rollingInterval: RollingInterval.Day)
                 .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Verbose)
                 .CreateLogger();
