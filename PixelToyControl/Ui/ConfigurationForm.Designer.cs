@@ -447,7 +447,7 @@
             groupBoxDefineAction.Size = new Size(332, 136);
             groupBoxDefineAction.TabIndex = 12;
             groupBoxDefineAction.TabStop = false;
-            groupBoxDefineAction.Text = "Configuree Action";
+            groupBoxDefineAction.Text = "Configure Action";
             // 
             // listBoxDevices
             // 

@@ -10,4 +10,5 @@ internal sealed class PixelTriggerConfiguration
     public Guid Guid { get; set; }
     public Point Location { get; set; }
     public Color Color { get; set; }
+    public KeyValuePair<int, double>[] EngineVibe { get; set; } = [];
 }
