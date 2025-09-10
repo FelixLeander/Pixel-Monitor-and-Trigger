@@ -18,7 +18,9 @@ public partial class ConfigurationForm : Form
     private void MainForm_Load(object sender, EventArgs e)
     {
         listBoxDevices.DataSource = ButtplugManager.BindingListDevices;
-        listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.DisplayName);
+        listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.Name);
+
+        Enricher.Sink = (s) => labelLiveLog.Text = s;
     }
 
     private async void ButtonPickPosition_Click(object sender, EventArgs e)
@@ -119,5 +121,18 @@ public partial class ConfigurationForm : Form
             bitmap.SetPixel(w, y, color);
 
         return bitmap;
+    }
+
+    private void ListBoxDevices_SelectedValueChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void ListBoxDevices_DoubleClick(object sender, EventArgs e)
+    {
+        if (listBoxDevices.SelectedItem is not ButtplugClientDevice buttplugClientDevice)
+            return;
+
+        new DebugBcd { ButtplugClientDevice = buttplugClientDevice }.ShowDialog();
     }
 }

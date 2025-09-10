@@ -57,6 +57,8 @@
             labelActionsCount = new Label();
             groupBoxDefineAction = new GroupBox();
             listBoxDevices = new ListBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            labelLiveLog = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).BeginInit();
             tableLayoutPanelMain.SuspendLayout();
             groupBoxPickPixel.SuspendLayout();
@@ -71,6 +73,7 @@
             groupBox2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             groupBoxDefinedActions.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBoxPreview
@@ -96,13 +99,13 @@
             tableLayoutPanelMain.Controls.Add(groupBoxDefinedActions, 1, 0);
             tableLayoutPanelMain.Controls.Add(groupBoxDefineAction, 0, 2);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
-            tableLayoutPanelMain.Location = new Point(129, 0);
+            tableLayoutPanelMain.Location = new Point(93, 3);
             tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             tableLayoutPanelMain.RowCount = 3;
             tableLayoutPanelMain.RowStyles.Add(new RowStyle());
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanelMain.Size = new Size(729, 448);
+            tableLayoutPanelMain.Size = new Size(762, 427);
             tableLayoutPanelMain.TabIndex = 5;
             // 
             // groupBoxPickPixel
@@ -262,7 +265,7 @@
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(3, 168);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(332, 135);
+            groupBox1.Size = new Size(332, 125);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Pick Pixel Color";
@@ -291,7 +294,7 @@
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelTriggerConfig.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanelTriggerConfig.Size = new Size(326, 113);
+            tableLayoutPanelTriggerConfig.Size = new Size(326, 103);
             tableLayoutPanelTriggerConfig.TabIndex = 4;
             // 
             // labelColorView
@@ -356,7 +359,7 @@
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(547, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(179, 159);
+            groupBox2.Size = new Size(212, 159);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Control";
@@ -376,7 +379,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(173, 137);
+            tableLayoutPanel3.Size = new Size(206, 137);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // button1
@@ -386,7 +389,7 @@
             button1.Dock = DockStyle.Fill;
             button1.Location = new Point(3, 3);
             button1.Name = "button1";
-            button1.Size = new Size(80, 25);
+            button1.Size = new Size(97, 25);
             button1.TabIndex = 0;
             button1.Text = "Start";
             button1.UseVisualStyleBackColor = true;
@@ -397,9 +400,9 @@
             button2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             button2.Dock = DockStyle.Fill;
             button2.Enabled = false;
-            button2.Location = new Point(89, 3);
+            button2.Location = new Point(106, 3);
             button2.Name = "button2";
-            button2.Size = new Size(81, 25);
+            button2.Size = new Size(97, 25);
             button2.TabIndex = 1;
             button2.Text = "Stop";
             button2.UseVisualStyleBackColor = true;
@@ -412,7 +415,7 @@
             groupBoxDefinedActions.Location = new Point(341, 3);
             groupBoxDefinedActions.Name = "groupBoxDefinedActions";
             tableLayoutPanelMain.SetRowSpan(groupBoxDefinedActions, 3);
-            groupBoxDefinedActions.Size = new Size(200, 442);
+            groupBoxDefinedActions.Size = new Size(200, 421);
             groupBoxDefinedActions.TabIndex = 11;
             groupBoxDefinedActions.TabStop = false;
             groupBoxDefinedActions.Text = "Defined Actions";
@@ -424,13 +427,13 @@
             checkedListBoxActions.Items.AddRange(new object[] { "dummy" });
             checkedListBoxActions.Location = new Point(3, 19);
             checkedListBoxActions.Name = "checkedListBoxActions";
-            checkedListBoxActions.Size = new Size(194, 405);
+            checkedListBoxActions.Size = new Size(194, 384);
             checkedListBoxActions.TabIndex = 5;
             // 
             // labelActionsCount
             // 
             labelActionsCount.Dock = DockStyle.Bottom;
-            labelActionsCount.Location = new Point(3, 424);
+            labelActionsCount.Location = new Point(3, 403);
             labelActionsCount.Name = "labelActionsCount";
             labelActionsCount.Size = new Size(194, 15);
             labelActionsCount.TabIndex = 6;
@@ -442,29 +445,58 @@
             groupBoxDefineAction.AutoSize = true;
             groupBoxDefineAction.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             groupBoxDefineAction.Dock = DockStyle.Fill;
-            groupBoxDefineAction.Location = new Point(3, 309);
+            groupBoxDefineAction.Location = new Point(3, 299);
             groupBoxDefineAction.Name = "groupBoxDefineAction";
-            groupBoxDefineAction.Size = new Size(332, 136);
+            groupBoxDefineAction.Size = new Size(332, 125);
             groupBoxDefineAction.TabIndex = 12;
             groupBoxDefineAction.TabStop = false;
             groupBoxDefineAction.Text = "Configure Action";
             // 
             // listBoxDevices
             // 
-            listBoxDevices.Dock = DockStyle.Left;
+            listBoxDevices.Dock = DockStyle.Fill;
             listBoxDevices.FormattingEnabled = true;
-            listBoxDevices.Location = new Point(0, 0);
+            listBoxDevices.Location = new Point(3, 3);
             listBoxDevices.Name = "listBoxDevices";
-            listBoxDevices.Size = new Size(129, 448);
+            listBoxDevices.Size = new Size(84, 427);
             listBoxDevices.TabIndex = 6;
+            listBoxDevices.SelectedValueChanged += ListBoxDevices_SelectedValueChanged;
+            listBoxDevices.DoubleClick += ListBoxDevices_DoubleClick;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(listBoxDevices, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanelMain, 1, 0);
+            tableLayoutPanel1.Controls.Add(labelLiveLog, 0, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(858, 448);
+            tableLayoutPanel1.TabIndex = 7;
+            // 
+            // labelLiveLog
+            // 
+            labelLiveLog.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(labelLiveLog, 2);
+            labelLiveLog.Dock = DockStyle.Fill;
+            labelLiveLog.Location = new Point(3, 433);
+            labelLiveLog.Name = "labelLiveLog";
+            labelLiveLog.Size = new Size(852, 15);
+            labelLiveLog.TabIndex = 7;
+            labelLiveLog.Text = "Log";
             // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(858, 448);
-            Controls.Add(tableLayoutPanelMain);
-            Controls.Add(listBoxDevices);
+            Controls.Add(tableLayoutPanel1);
             Name = "ConfigurationForm";
             Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxPreview).EndInit();
@@ -489,6 +521,8 @@
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
             groupBoxDefinedActions.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -523,5 +557,7 @@
         private Label labelActionsCount;
         private GroupBox groupBoxDefineAction;
         private ListBox listBoxDevices;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label labelLiveLog;
     }
 }

@@ -12,12 +12,24 @@ public partial class DebugBcd : Form
 
     private void DebugBcd_Load(object sender, EventArgs e)
     {
-        var vib = ButtplugClientDevice.VibrateAttributes;
-        var vibG = ButtplugClientDevice.GenericAcutatorAttributes(Buttplug.Core.Messages.ActuatorType.Vibrate);
+        foreach (var item in ButtplugClientDevice.LinearAttributes)
+        {
 
-        var vib = ButtplugClientDevice.VibrateAttributes.First().FeatureDescriptor.;
+        }
 
+        foreach (var item in ButtplugClientDevice.OscillateAttributes)
+        {
 
+        }
 
+        foreach (var item in ButtplugClientDevice.RotateAttributes)
+        {
+
+        }
+
+        foreach (var item in ButtplugClientDevice.VibrateAttributes)
+        {
+
+        }
     }
 }

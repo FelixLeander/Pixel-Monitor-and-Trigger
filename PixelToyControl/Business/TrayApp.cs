@@ -28,16 +28,6 @@ internal sealed class TrayApp : ApplicationContext
                 CreateOrShowConfigurator();
         };
 
-        _buttplugManager.ButtplugClient.DeviceRemoved += (s, dev) => ToyDevices.DropDownItems.RemoveByKey(dev.Device.DisplayName);
-        _buttplugManager.ButtplugClient.DeviceAdded += (s, dev) =>
-        {
-            var tsb = new ToolStripButton(dev.Device.DisplayName)
-            {
-                CheckState = CheckState.Checked,
-            };
-            ToyDevices.DropDownItems.Insert(-1, tsb);
-        };
-
         NotifyIcon.ContextMenuStrip.Items.Add("Open Configurator", null, (s, e) => CreateOrShowConfigurator());
         NotifyIcon.ContextMenuStrip.Items.Add(ToyDevices);
         NotifyIcon.ContextMenuStrip.Items.Add("Exit", null, (s, e) => ExitApplication());
@@ -47,7 +37,7 @@ internal sealed class TrayApp : ApplicationContext
     {
         Log.Verbose("Starting scan...");
         await _buttplugManager.ConnectAndScan();
-
+        Log.Verbose("Done scanning.");
     }
 
     internal void CreateOrShowConfigurator()

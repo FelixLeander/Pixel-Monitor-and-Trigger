@@ -21,14 +21,15 @@ public sealed class ButtplugManager
         ButtplugClient.PingTimeout += (s, e) => Log.Verbose("Ping timeout.");
 
         await ButtplugClient.ConnectAsync(_connector, cancellationToken);
+        Log.Information("Connected to server.");
 
         foreach (var device in ButtplugClient.Devices)
         {
-            Log.Information($"Added device; '{device.DisplayName}:{device.Name}:{device.Index}'");
+            Log.Information($"Added device; '{device.Name}:{device.Index}'");
             BindingListDevices.Add(device);
         }
 
         await ButtplugClient.StartScanningAsync(cancellationToken);
+        Log.Information("Scanning complete.");
     }
-
 }
