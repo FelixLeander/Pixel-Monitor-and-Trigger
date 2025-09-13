@@ -3,12 +3,12 @@ using System.ComponentModel;
 
 namespace PixelToyControl.Ui;
 
-public partial class DebugBcd : Form
+public partial class DebugBcdForm : Form
 {
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public required ButtplugClientDevice ButtplugClientDevice { get; set; }
 
-    public DebugBcd() => InitializeComponent();
+    public DebugBcdForm() => InitializeComponent();
 
     private void DebugBcd_Load(object sender, EventArgs e)
     {

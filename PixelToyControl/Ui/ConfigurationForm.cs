@@ -1,18 +1,21 @@
-﻿
-using Buttplug.Client;
+﻿using Buttplug.Client;
 using PixelToyControl.Business;
+using PixelToyControl.Models;
 using Serilog;
+using System.ComponentModel;
 
 namespace PixelToyControl.Ui;
 
 public partial class ConfigurationForm : Form
 {
-    public required ButtplugManager ButtplugManager;
-    private Bitmap Bitmap { get; }
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public required ButtplugManager ButtplugManager { get; init; }
+    private readonly BindingList<ActionConfig> _actionConfigs = [];
+    private readonly Bitmap _screenImage;
     public ConfigurationForm()
     {
         InitializeComponent();
-        Bitmap = new Bitmap(pictureBoxPreview.Width, pictureBoxPreview.Height);
+        _screenImage = new Bitmap(pictureBoxPreview.Width, pictureBoxPreview.Height);
     }
 
     private void MainForm_Load(object sender, EventArgs e)
@@ -20,7 +23,9 @@ public partial class ConfigurationForm : Form
         listBoxDevices.DataSource = ButtplugManager.BindingListDevices;
         listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.Name);
 
-        Enricher.Sink = (s) => labelLiveLog.Text = s;
+        Enricher.Sink = (s) => labelLiveLog.Text = s; // Display log at the bottom
+
+
     }
 
     private async void ButtonPickPosition_Click(object sender, EventArgs e)
@@ -59,25 +64,6 @@ public partial class ConfigurationForm : Form
         SetHexColor();
     }
 
-    private string CreatePreviewPictureGetHexColor(int x, int y)
-    {
-        var widthOffset = pictureBoxPreview.Width / 2;
-        var heightOffset = pictureBoxPreview.Height / 2;
-        var sX = x - widthOffset;
-        var sY = y - heightOffset;
-
-        using var g = Graphics.FromImage(Bitmap);
-        g.CopyFromScreen(sX, sY, 0, 0, new Size(pictureBoxPreview.Width, pictureBoxPreview.Height));
-
-        var centerColor = Bitmap.GetPixel(widthOffset, heightOffset);
-        pictureBoxColor.BackColor = centerColor;
-
-        Log.Verbose("Setting preview image.");
-        pictureBoxPreview.Image = ApplyCrosshairMask(Bitmap, Color.Red, widthOffset, heightOffset);
-
-        return $"#{centerColor.Name}";
-    }
-
     private void PictureBoxPreview_MouseClick(object sender, MouseEventArgs e)
     {
         var heightOffset = e.Y - (pictureBoxPreview.Height / 2);
@@ -94,7 +80,54 @@ public partial class ConfigurationForm : Form
         else
             textBoxHexColor.BackColor = default;
     }
+
     private void ButtonSetHex_Click(object sender, EventArgs e) => SetHexColor();
+
+    private void ListBoxDevices_DoubleClick(object sender, EventArgs e)
+    {
+        if (listBoxDevices.SelectedItem is not ButtplugClientDevice buttplugClientDevice)
+            return;
+
+        Log.Verbose("Opening form {form} with device '{name}'.", nameof(DebugBcdForm), buttplugClientDevice.Name);
+        new DebugBcdForm { ButtplugClientDevice = buttplugClientDevice }.ShowDialog();
+    }
+
+    private void CheckedListBoxActions_SelectedValueChanged(object sender, EventArgs e)
+    {
+        if (checkedListBoxActions.SelectedValue is not ActionConfig actionConfig)
+            return;
+
+    }
+
+    private void ButtonAddNew_Click(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonRemove_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    #region Helpers
+    private string CreatePreviewPictureGetHexColor(int x, int y)
+    {
+        var widthOffset = pictureBoxPreview.Width / 2;
+        var heightOffset = pictureBoxPreview.Height / 2;
+        var sX = x - widthOffset;
+        var sY = y - heightOffset;
+
+        using var g = Graphics.FromImage(_screenImage);
+        g.CopyFromScreen(sX, sY, 0, 0, new Size(pictureBoxPreview.Width, pictureBoxPreview.Height));
+
+        var centerColor = _screenImage.GetPixel(widthOffset, heightOffset);
+        pictureBoxColor.BackColor = centerColor;
+
+        Log.Verbose("Setting preview image.");
+        pictureBoxPreview.Image = ApplyCrosshairMask(_screenImage, Color.Red, widthOffset, heightOffset);
+
+        return $"#{centerColor.Name}";
+    }
+
     private void SetHexColor()
     {
         try
@@ -122,17 +155,5 @@ public partial class ConfigurationForm : Form
 
         return bitmap;
     }
-
-    private void ListBoxDevices_SelectedValueChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void ListBoxDevices_DoubleClick(object sender, EventArgs e)
-    {
-        if (listBoxDevices.SelectedItem is not ButtplugClientDevice buttplugClientDevice)
-            return;
-
-        new DebugBcd { ButtplugClientDevice = buttplugClientDevice }.ShowDialog();
-    }
+    #endregion
 }

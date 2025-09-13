@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PixelToyControl.Models.Entity;
+using PixelToyControl.Models;
 
 namespace PixelToyControl.Data;
 
-internal sealed class AppContext : DbContext
+internal sealed class DatabaseContext : DbContext
 {
-    DbSet<PixelTriggerConfiguration> PixelTriggerConfigurations => Set<PixelTriggerConfiguration>();
+    DbSet<ActionConfig> ActionConfigs => Set<ActionConfig>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite($"Data Source={nameof(PixelToyControl)}Db.sqlite");
