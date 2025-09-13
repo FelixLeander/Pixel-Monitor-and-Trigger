@@ -1,6 +1,6 @@
 ﻿namespace PixelToyControl.Ui
 {
-    partial class DebugBcd
+    partial class DebugBcdForm
     {
         /// <summary>
         /// Required designer variable.

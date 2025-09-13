@@ -16,18 +16,12 @@ public sealed class ButtplugManager
     {
         ButtplugClient.DeviceAdded += (s, dev) => BindingListDevices.Add(dev.Device);
         ButtplugClient.DeviceRemoved += (s, dev) => BindingListDevices.Remove(dev.Device);
-        ButtplugClient.ScanningFinished += (s, e) => Log.Verbose("Stopped scanning.");
+        ButtplugClient.ScanningFinished += (s, e) => Log.Verbose("Scanning finished.");
         ButtplugClient.ErrorReceived += (s, error) => Log.Error($"Error: {error.Exception.Message}");
         ButtplugClient.PingTimeout += (s, e) => Log.Verbose("Ping timeout.");
 
         await ButtplugClient.ConnectAsync(_connector, cancellationToken);
         Log.Information("Connected to server.");
-
-        foreach (var device in ButtplugClient.Devices)
-        {
-            Log.Information($"Added device; '{device.Name}:{device.Index}'");
-            BindingListDevices.Add(device);
-        }
 
         await ButtplugClient.StartScanningAsync(cancellationToken);
         Log.Information("Scanning complete.");
