@@ -1,16 +1,19 @@
 ﻿using Buttplug.Client;
+using Buttplug.Core.Messages;
 using PixelToyControl.Business;
+using PixelToyControl.Data;
 using PixelToyControl.Models;
 using Serilog;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PixelToyControl.Ui;
 
-public partial class ConfigurationForm : Form
+public sealed partial class ConfigurationForm : Form
 {
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public required ButtplugManager ButtplugManager { get; init; }
-    private readonly BindingList<ActionConfig> _actionConfigs = [];
     private readonly Bitmap _screenImage;
     public ConfigurationForm()
     {
@@ -20,12 +23,49 @@ public partial class ConfigurationForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        listBoxDevices.DataSource = ButtplugManager.BindingListDevices;
+        listBoxDevices.DataSource = ButtplugManager.BindingDevices;
         listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.Name);
 
         Enricher.Sink = (s) => labelLiveLog.Text = s; // Display log at the bottom
 
+        using var context = new DatabaseContext();
+        checkedListBoxActions.Items.AddRange([.. context.ActionConfigs]);
+    }
 
+    private void ListBoxDevices_SelectedValueChanged(object sender, EventArgs e)
+    {
+        Test();
+    }
+
+    private void ListBoxDevices_MouseClick(object sender, MouseEventArgs e)
+    {
+        Test();
+    }
+
+    private void Test()
+    {
+        flowLayoutPanel.Controls.Clear();
+
+        if (listBoxDevices.SelectedItem is not ButtplugClientDevice buttplugClientDevice)
+            return;
+
+        foreach (var va in buttplugClientDevice.VibrateAttributes)
+        {
+            var descritbtion = string.IsNullOrWhiteSpace(va.FeatureDescriptor)
+                    ? $"{va.ActuatorType} {va.Index}:"
+                    : va.FeatureDescriptor;
+
+            var dac = new DeviceAttributeControl(va.Index, descritbtion, va.StepCount);
+            dac.trackBarSteps.Scroll += (_, _)
+                =>
+            {
+                var value = dac.trackBarSteps.Value * 0.01;
+                Log.Verbose("VibrateIndex: {index} with value: {value}", va.Index, value);
+                buttplugClientDevice.VibrateAsync([va.Index, value]);
+            };
+
+            flowLayoutPanel.Controls.Add(dac);
+        }
     }
 
     private async void ButtonPickPosition_Click(object sender, EventArgs e)
@@ -83,29 +123,36 @@ public partial class ConfigurationForm : Form
 
     private void ButtonSetHex_Click(object sender, EventArgs e) => SetHexColor();
 
-    private void ListBoxDevices_DoubleClick(object sender, EventArgs e)
-    {
-        if (listBoxDevices.SelectedItem is not ButtplugClientDevice buttplugClientDevice)
-            return;
-
-        Log.Verbose("Opening form {form} with device '{name}'.", nameof(DebugBcdForm), buttplugClientDevice.Name);
-        new DebugBcdForm { ButtplugClientDevice = buttplugClientDevice }.ShowDialog();
-    }
-
     private void CheckedListBoxActions_SelectedValueChanged(object sender, EventArgs e)
     {
-        if (checkedListBoxActions.SelectedValue is not ActionConfig actionConfig)
+        var actionConfig = checkedListBoxActions.SelectedItem as ActionConfig;
+        buttonDeleteAction.Enabled = actionConfig != null;
+        if (actionConfig == null)
             return;
 
+
+        Console.WriteLine();
     }
 
     private void ButtonAddNew_Click(object sender, EventArgs e)
     {
+        var actionConfig = new ActionConfig();
+        checkedListBoxActions.Items.Add(actionConfig);
+
+        using var context = new DatabaseContext();
+        context.ActionConfigs.Add(actionConfig);
+        context.SaveChanges();
     }
 
-    private void ButtonRemove_Click(object sender, EventArgs e)
+    private void ButtonDelete_Click(object sender, EventArgs e)
     {
+        if (checkedListBoxActions.SelectedItem is not ActionConfig actionConfig)
+            return;
 
+        checkedListBoxActions.Items.Remove(actionConfig);
+        using var context = new DatabaseContext();
+        context.ActionConfigs.Remove(actionConfig);
+        context.SaveChanges();
     }
 
     #region Helpers
