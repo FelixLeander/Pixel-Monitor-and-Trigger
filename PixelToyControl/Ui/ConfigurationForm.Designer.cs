@@ -53,7 +53,8 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             checkedListBoxActions = new CheckedListBox();
             buttonAddNew = new Button();
-            buttonRemove = new Button();
+            buttonDeleteAction = new Button();
+            flowLayoutPanel = new FlowLayoutPanel();
             listBoxDevices = new ListBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             labelLiveLog = new Label();
@@ -363,11 +364,11 @@
             // 
             groupBoxDefinedActions.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             groupBoxDefinedActions.Controls.Add(tableLayoutPanel2);
-            groupBoxDefinedActions.Dock = DockStyle.Left;
+            groupBoxDefinedActions.Dock = DockStyle.Fill;
             groupBoxDefinedActions.Location = new Point(341, 3);
             groupBoxDefinedActions.Name = "groupBoxDefinedActions";
             tableLayoutPanelMain.SetRowSpan(groupBoxDefinedActions, 3);
-            groupBoxDefinedActions.Size = new Size(137, 421);
+            groupBoxDefinedActions.Size = new Size(418, 421);
             groupBoxDefinedActions.TabIndex = 11;
             groupBoxDefinedActions.TabStop = false;
             groupBoxDefinedActions.Text = "Defined Actions";
@@ -376,19 +377,21 @@
             // 
             tableLayoutPanel2.AutoSize = true;
             tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(checkedListBoxActions, 0, 1);
             tableLayoutPanel2.Controls.Add(buttonAddNew, 0, 0);
-            tableLayoutPanel2.Controls.Add(buttonRemove, 1, 0);
+            tableLayoutPanel2.Controls.Add(buttonDeleteAction, 1, 0);
+            tableLayoutPanel2.Controls.Add(flowLayoutPanel, 2, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 19);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle());
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(131, 399);
+            tableLayoutPanel2.Size = new Size(412, 399);
             tableLayoutPanel2.TabIndex = 7;
             // 
             // checkedListBoxActions
@@ -415,19 +418,29 @@
             buttonAddNew.UseVisualStyleBackColor = true;
             buttonAddNew.Click += ButtonAddNew_Click;
             // 
-            // buttonRemove
+            // buttonDeleteAction
             // 
-            buttonRemove.AutoSize = true;
-            buttonRemove.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            buttonRemove.Dock = DockStyle.Fill;
-            buttonRemove.Enabled = false;
-            buttonRemove.Location = new Point(50, 3);
-            buttonRemove.Name = "buttonRemove";
-            buttonRemove.Size = new Size(78, 25);
-            buttonRemove.TabIndex = 7;
-            buttonRemove.Text = "Remove";
-            buttonRemove.UseVisualStyleBackColor = true;
-            buttonRemove.Click += ButtonRemove_Click;
+            buttonDeleteAction.AutoSize = true;
+            buttonDeleteAction.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonDeleteAction.Dock = DockStyle.Fill;
+            buttonDeleteAction.Enabled = false;
+            buttonDeleteAction.Location = new Point(50, 3);
+            buttonDeleteAction.Name = "buttonDeleteAction";
+            buttonDeleteAction.Size = new Size(78, 25);
+            buttonDeleteAction.TabIndex = 7;
+            buttonDeleteAction.Text = "Remove";
+            buttonDeleteAction.UseVisualStyleBackColor = true;
+            buttonDeleteAction.Click += ButtonDelete_Click;
+            // 
+            // flowLayoutPanel
+            // 
+            flowLayoutPanel.Dock = DockStyle.Fill;
+            flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel.Location = new Point(134, 3);
+            flowLayoutPanel.Name = "flowLayoutPanel";
+            tableLayoutPanel2.SetRowSpan(flowLayoutPanel, 2);
+            flowLayoutPanel.Size = new Size(275, 393);
+            flowLayoutPanel.TabIndex = 8;
             // 
             // listBoxDevices
             // 
@@ -438,7 +451,8 @@
             listBoxDevices.Name = "listBoxDevices";
             listBoxDevices.Size = new Size(84, 427);
             listBoxDevices.TabIndex = 6;
-            listBoxDevices.DoubleClick += ListBoxDevices_DoubleClick;
+            listBoxDevices.MouseClick += ListBoxDevices_MouseClick;
+            listBoxDevices.SelectedValueChanged += ListBoxDevices_SelectedValueChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -532,6 +546,7 @@
         private Label labelLiveLog;
         private TableLayoutPanel tableLayoutPanel2;
         private Button buttonAddNew;
-        private Button buttonRemove;
+        private Button buttonDeleteAction;
+        private FlowLayoutPanel flowLayoutPanel;
     }
 }

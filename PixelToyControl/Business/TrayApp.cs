@@ -1,5 +1,5 @@
 ﻿using Buttplug.Client;
-using PixelToyControl.Models.Entity;
+using PixelToyControl.Data;
 using PixelToyControl.Ui;
 using Serilog;
 using System.Text.Json;
@@ -28,9 +28,18 @@ internal sealed class TrayApp : ApplicationContext
                 CreateOrShowConfigurator();
         };
 
-        NotifyIcon.ContextMenuStrip.Items.Add("Open Configurator", null, (s, e) => CreateOrShowConfigurator());
+        NotifyIcon.ContextMenuStrip.Items.Add("Open Configurator", null, (_, _) => CreateOrShowConfigurator());
         NotifyIcon.ContextMenuStrip.Items.Add(ToyDevices);
-        NotifyIcon.ContextMenuStrip.Items.Add("Exit", null, (s, e) => ExitApplication());
+#if DEBUG
+        NotifyIcon.ContextMenuStrip.Items.Add("DEBUG: Reset Database", null, (_, _) =>
+        {
+            using var debugContext = new DatabaseContext();
+            debugContext.Database.EnsureDeleted();
+            debugContext.Database.EnsureCreated();
+        });
+#endif
+        NotifyIcon.ContextMenuStrip.Items.Add("Stop All", null, (_,_) => _buttplugManager.ButtplugClient.StopAllDevicesAsync());
+        NotifyIcon.ContextMenuStrip.Items.Add("Exit", null, (_, _) => ExitApplication());
     }
 
     internal async Task StartAsync()

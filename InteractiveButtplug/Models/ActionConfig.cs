@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
-namespace PixelToyControl.Models;
+namespace InteractiveButtplug.Models;
 
 [Table(nameof(ActionConfig))]
 internal sealed class ActionConfig

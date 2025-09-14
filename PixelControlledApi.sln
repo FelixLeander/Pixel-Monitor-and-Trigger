@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelControlledApi", "Pixel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelToyControl", "PixelToyControl\PixelToyControl.csproj", "{F7EF1480-08B3-9BBB-51A1-3E8AFEB6A8F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveButtplug", "InteractiveButtplug\InteractiveButtplug.csproj", "{BB285EE1-0A01-4D50-B103-A03448232579}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F7EF1480-08B3-9BBB-51A1-3E8AFEB6A8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7EF1480-08B3-9BBB-51A1-3E8AFEB6A8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7EF1480-08B3-9BBB-51A1-3E8AFEB6A8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB285EE1-0A01-4D50-B103-A03448232579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB285EE1-0A01-4D50-B103-A03448232579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB285EE1-0A01-4D50-B103-A03448232579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB285EE1-0A01-4D50-B103-A03448232579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
