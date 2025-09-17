@@ -26,8 +26,6 @@ public sealed partial class ConfigurationForm : Form
         listBoxDevices.DataSource = ButtplugManager.BindingDevices;
         listBoxDevices.DisplayMember = nameof(ButtplugClientDevice.Name);
 
-        Enricher.Sink = (s) => labelLiveLog.Text = s; // Display log at the bottom
-
         using var context = new DatabaseContext();
         checkedListBoxActions.Items.AddRange([.. context.ActionConfigs]);
     }
