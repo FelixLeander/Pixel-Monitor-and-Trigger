@@ -74,7 +74,6 @@ internal static class Program
     /// <returns>The serilog logger.</returns>
     private static Logger CreateLogger() => new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .Enrich.With<Enricher>()
                 .WriteTo.File("logs/log.log", LogEventLevel.Information, rollingInterval: RollingInterval.Day)
                 .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Verbose)
                 .CreateLogger();
