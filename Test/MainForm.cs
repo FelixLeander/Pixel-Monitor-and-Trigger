@@ -41,7 +41,7 @@ public partial class MainForm : Form
 
             _ = LoopAsync();
 
-            FillPictureBox(pictureBox2, Color.Green);
+            FillPictureBox(pictureBoxRecordedColor, Color.Green);
         }
         catch (Exception ex)
         {
@@ -52,30 +52,14 @@ public partial class MainForm : Form
 
     private async void Button1_Click(object sender, EventArgs e)
     {
-        FillPictureBox(pictureBox1, Color.Green);
+        FillPictureBox(pictureBoxPickedColor, Color.Green);
 
         await Task.Delay(3000);
 
         PixelPos = Cursor.Position;
         Color = GetColorAtPos(PixelPos);
-        FillPictureBox(pictureBox1, Color);
+        FillPictureBox(pictureBoxPickedColor, Color);
     }
-
-    public static double Similarity(Color c1, Color c2)
-    {
-        int rDiff = c1.R - c2.R;
-        int gDiff = c1.G - c2.G;
-        int bDiff = c1.B - c2.B;
-
-        double distance = Math.Sqrt(rDiff * rDiff + gDiff * gDiff + bDiff * bDiff);
-        double maxDistance = Math.Sqrt(255 * 255 * 3);
-
-        // normalize: 1.0 = identical, 0.0 = opposite
-        var result = 1.0 - (distance / maxDistance);
-        Console.WriteLine($"Color distance {result}");
-        return result;
-    }
-
     private async void Button2_Click(object sender, EventArgs e)
     {
         _running = !_running;
@@ -100,8 +84,8 @@ public partial class MainForm : Form
 
                 var pixel = GetColorAtPos(PixelPos);
                 var sim = Similarity(Color, pixel);
-                if (sim > 0.9)
-                    await _currentDevice.VibrateAsync(0.5);
+                if (sim > 0.85)
+                    await _currentDevice.VibrateAsync(1);
                 else
                     await _currentDevice.VibrateAsync(0);
             }
@@ -120,44 +104,38 @@ public partial class MainForm : Form
         return bitmap.GetPixel(0, 0);
     }
 
-    private CancellationTokenSource? _cancellationTokenSource;
+    private CancellationTokenSource _lastCts = new();
     private async void Button3_Click(object sender, EventArgs e)
     {
-        FillPictureBox(pictureBox2, Color.Green);
+        _lastCts.Cancel();
 
-        if (_cancellationTokenSource != null)
-        {
-            Console.WriteLine("stop color-recorder");
-            _cancellationTokenSource.Cancel();
-            await Task.Delay(300);
-            _cancellationTokenSource = null;
-            return;
-        }
+        await Task.Delay(300);
+
+        var newCts = new CancellationTokenSource(3000);
 
         Console.WriteLine("New color-recorder");
-        _cancellationTokenSource = new CancellationTokenSource();
-        _cancellationTokenSource.CancelAfter(10000);
+        newCts = new CancellationTokenSource();
+        newCts.CancelAfter(3000);
 
         var colors = await Task.Run(async () =>
         {
             var hashSet = new HashSet<Color>();
             var bitmap = new Bitmap(1, 1);
-            while (!_cancellationTokenSource.IsCancellationRequested)
+            while (!newCts.IsCancellationRequested)
             {
                 await Task.Delay(100);
                 var color = GetColorAtPos(PixelPos);
                 hashSet.Add(color);
             }
 
-
             return hashSet.ToList();
         });
 
-        pictureBox2.Image = CreateHorizontalColorStripe(colors, pictureBox2.Width, pictureBox2.Height);
+        pictureBoxRecordedColor.Image = CreateHorizontalColorStripe(colors, pictureBoxRecordedColor.Width, pictureBoxRecordedColor.Height);
 
-        _cancellationTokenSource = null;
+        _lastCts = newCts;
+
         return;
-
         static Bitmap CreateHorizontalColorStripe(List<Color> colors, int width, int height)
         {
             if (colors == null || colors.Count == 0)
@@ -184,10 +162,11 @@ public partial class MainForm : Form
         if (e.Button != MouseButtons.Left)
             return;
 
-        var bitmap = pictureBox2.Image as Bitmap ?? throw new Exception("HOW NOT CASTABLE!");
+        var bitmap = pictureBoxRecordedColor.Image as Bitmap ?? throw new Exception("HOW NOT CASTABLE!");
         Color = bitmap.GetPixel(e.X, e.Y);
+        Console.WriteLine($"Picked: {Color}");
 
-        FillPictureBox(pictureBox1, Color);
+        FillPictureBox(pictureBoxPickedColor, Color);
     }
 
     // DO NOT; FOR THE LOVE OF ALL THAT IS HOWLY, USE THE 'USING' KEYWORD ON BITMAP!
@@ -201,5 +180,29 @@ public partial class MainForm : Form
 
         pictureBox.Image?.Dispose();
         pictureBox.Image = bitmap;
+    }
+
+    private void ButtonSetColor_Click(object sender, EventArgs e)
+    {
+        var cp = new ColorDialog();
+        cp.ShowDialog();
+
+        if (cp.Color != default)
+            Color = cp.Color;
+    }
+
+    public static double Similarity(Color c1, Color c2)
+    {
+        int rDiff = c1.R - c2.R;
+        int gDiff = c1.G - c2.G;
+        int bDiff = c1.B - c2.B;
+
+        double distance = Math.Sqrt(rDiff * rDiff + gDiff * gDiff + bDiff * bDiff);
+        double maxDistance = Math.Sqrt(255 * 255 * 3);
+
+        // normalize: 1.0 = identical, 0.0 = opposite
+        var result = 1.0 - (distance / maxDistance);
+        Console.WriteLine($"Color distance {result}");
+        return result;
     }
 }
