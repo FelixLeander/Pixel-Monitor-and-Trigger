@@ -1,4 +1,5 @@
 using Buttplug.Client;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
@@ -46,7 +47,6 @@ public partial class MainForm : Form
         catch (Exception ex)
         {
             MessageBox.Show($"CATASTROPIC FAILURE! {Environment.NewLine}{ex.Message}");
-            throw;
         }
     }
 
@@ -78,20 +78,30 @@ public partial class MainForm : Form
                 await Task.Delay(10);
                 if (!_running)
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                     continue;
                 }
 
                 var pixel = GetColorAtPos(PixelPos);
                 var sim = Similarity(Color, pixel);
-                if (sim > 0.85)
-                    await _currentDevice.VibrateAsync(1);
+                if (sim > 0.7)
+                {
+                    Console.WriteLine("AutoVibe: Escalate");
+                    double[] doubles = [(double)numericUpDownEscalateOne.Value, (double)numericUpDownEscaleTwo.Value];
+                    await _currentDevice.VibrateAsync(doubles);
+                    await Task.Delay((int)numericUpDownTriggerTime.Value);
+                }
                 else
-                    await _currentDevice.VibrateAsync(0);
+                {
+                    Console.WriteLine("AutoVibe: Idle");
+                    double[] doubles = [(double)numericUpDownIdleOne.Value, (double)numericUpDownIdleTwo.Value];
+                    await _currentDevice.VibrateAsync(doubles);
+                }
             }
         }
         catch (Exception ex)
         {
+            await _buttplugClient.StopAllDevicesAsync();
             MessageBox.Show($"Loop failure! {Environment.NewLine}{ex.Message}");
             throw;
         }
@@ -204,5 +214,36 @@ public partial class MainForm : Form
         var result = 1.0 - (distance / maxDistance);
         Console.WriteLine($"Color distance {result}");
         return result;
+    }
+
+    private async void ButtonEscalate_MouseDown(object sender, MouseEventArgs e)
+    {
+        Console.WriteLine("TestVibe: Escalate");
+        double[] doubles = [(double)numericUpDownEscalateOne.Value, (double)numericUpDownEscaleTwo.Value];
+        await _currentDevice.VibrateAsync(doubles);
+
+    }
+
+    private void ButtonEscalate_MouseUp(object sender, MouseEventArgs e) => ButtonTestVibs_MouseHover(sender, e);
+    private async void ButtonTestVibs_MouseHover(object sender, EventArgs e)
+    {
+        Console.WriteLine("TestVibe: Idle");
+        double[] doubles = [(double)numericUpDownIdleOne.Value, (double)numericUpDownIdleTwo.Value];
+        await _currentDevice.VibrateAsync(doubles);
+    }
+
+    private async void ButtonTestVibs_MouseLeave(object sender, EventArgs e)
+    {
+        Console.WriteLine("TestVibe: Stop");
+        await _currentDevice.Stop();
+    }
+
+    private async void ButtonTestTrigger_Click(object sender, EventArgs e)
+    {
+        Console.WriteLine("TestTriggerVibe: Escalate");
+        double[] doubles = [(double)numericUpDownEscalateOne.Value, (double)numericUpDownEscaleTwo.Value];
+        await _currentDevice.VibrateAsync(doubles);
+        await Task.Delay((int)numericUpDownTriggerTime.Value);
+        await _currentDevice.Stop();
     }
 }
